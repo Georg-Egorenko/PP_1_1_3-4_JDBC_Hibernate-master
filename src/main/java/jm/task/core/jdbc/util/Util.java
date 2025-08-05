@@ -1,5 +1,6 @@
 package jm.task.core.jdbc.util;
 
+import jm.task.core.jdbc.model.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -10,25 +11,13 @@ public class Util {
         try {
             Configuration configuration = new Configuration();
 
-            // Базовые настройки подключения
             configuration.setProperty("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver")
                     .setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/mydb?useSSL=false")
                     .setProperty("hibernate.connection.username", "Georg")
                     .setProperty("hibernate.connection.password", "Georg")
                     .setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
 
-            /*****************************************************************
-             * КОГДА У ВАС ПОЯВЯТСЯ КЛАССЫ СУЩНОСТЕЙ (User и др.):
-             *
-             * 1. Раскомментируйте строку ниже
-             * 2. Замените User.class на ваш класс сущности
-             * 3. Добавьте дополнительные классы через запятую
-             *
-             * Пример:
-             * configuration.addAnnotatedClass(User.class)
-             *              .addAnnotatedClass(Product.class);
-             *****************************************************************/
-            // configuration.addAnnotatedClass(User.class);
+            configuration.addAnnotatedClass(User.class);
 
             return configuration.buildSessionFactory();
         } catch (Throwable ex) {
